@@ -27,7 +27,19 @@ class TicTacToeBoard:
                     return 1
                 if self._board[3 + i] == BoardPosition.O:
                     return -1
+        # Check diagonals
+        if self._board[0] == self._board[4] == self._board[8] or \
+                self._board[2] == self._board[4] == self._board[6]:
+            if self._board[3 + i] == BoardPosition.X:
+                return 1
+            if self._board[3 + i] == BoardPosition.O:
+                return -1
 
+        # No side is winning
+        return 0
+
+    def move(index):
+        pass
 
 
 # Class to represent each slot in the board
