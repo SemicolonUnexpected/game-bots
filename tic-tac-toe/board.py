@@ -15,6 +15,11 @@ class TicTacToeBoard:
                 f"| {self._board[6]} | {self._board[7]} | {self._board[2]} |\n"
                 "----7---8---9")
 
+    def __get_child(index, value):
+        new = TicTacToeBoard()
+        new._board[index] = value
+        return new
+
     # Return a score showing which side this position favours
     # This is a simple heuristic function as we can explore the whole tree
     # We can return whether each side has won rather than a decimal
@@ -35,11 +40,13 @@ class TicTacToeBoard:
             if self._board[3 + i] == BoardPosition.O:
                 return -1
 
-        # No side is winning
+        # No side has won
         return 0
 
-    def move(index):
-        pass
+    def move(self, index):
+        canMove = self._board[index] == BoardPosition.Empty
+        if canMove:
+            pass
 
 
 # Class to represent each slot in the board
