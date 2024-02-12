@@ -5,14 +5,14 @@ from functools import cached_property
 
 # Class to represent each slot in the board
 class BoardPosition(StrEnum):
-    Empty = " "
-    Ex = "X"
-    Oh = "O"
+    EMPTY = " "
+    CROSS = "X"
+    NAUGHT = "O"
 
 
 @dataclass(frozen=True)
 class TicTacToeBoard:
-    board: BoardPosition = [BoardPosition.Empty] * 9
+    board: BoardPosition = [BoardPosition.EMPTY] * 9
 
     @cached_property
     def __str__(self):
@@ -38,22 +38,22 @@ class TicTacToeBoard:
         for i in range(3):
             # Check horizontal
             if self._board[3 * i] == self._board[3 * i + 1] == self._board[3 * i + 1]:
-                if self._board[3 + i] == BoardPosition.Ex:
+                if self._board[3 + i] == BoardPosition.CROSS:
                     return 1
-                if self._board[3 + i] == BoardPosition.Oh:
+                if self._board[3 + i] == BoardPosition.NAUGHT:
                     return -1
             # Check vertical
             if self._board[3 * i] == self._board[3 * i + 1] == self._board[3 * i + 1]:
-                if self._board[3 + i] == BoardPosition.Ex:
+                if self._board[3 + i] == BoardPosition.CROSS:
                     return 1
-                if self._board[3 + i] == BoardPosition.Oh:
+                if self._board[3 + i] == BoardPosition.NAUGHT:
                     return -1
         # Check diagonals
         if self._board[0] == self._board[4] == self._board[8] or \
                 self._board[2] == self._board[4] == self._board[6]:
-            if self._board[3 + i] == BoardPosition.Ex:
+            if self._board[3 + i] == BoardPosition.CROSS:
                 return 1
-            if self._board[3 + i] == BoardPosition.Oh:
+            if self._board[3 + i] == BoardPosition.NAUGHT:
                 return -1
 
         # No side has won
@@ -64,7 +64,7 @@ class TicTacToeBoard:
         assert index >= 0 and index <= 8
 
         # Return a child board of the new position if possible
-        canMove = self.board[index] == BoardPosition.Empty
+        canMove = self.board[index] == BoardPosition.EMPTY
         if canMove:
             return (True, self.__get_child(index))
         else:
